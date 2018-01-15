@@ -5,7 +5,7 @@ normal = IP(1:cur_sample_num,1:dimension,T);
 normal = normal.';
 for i = 1:cur_sample_num
     for j = 1:dimension
-        add_point(j,i) = upper_limit * normal(j,i);
+        add_point(j,i) = (upper_limit(j)-low_limit(j)) * normal(j,i) +low_limit(j);
     end
 end
 sample_point = add_point;
