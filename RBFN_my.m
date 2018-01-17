@@ -9,10 +9,12 @@ H           = zeros(samp_kazu,samp_kazu);
 seikiten_ex = zeros(samp_kazu,dimension,samp_kazu);
 ramuda      = 10.^(-2)*eye(samp_kazu,samp_kazu);
 %%%%%%%%%%%%%%%%%%%%%% RBFN main program  %%%%%%%%%%%%%%%%%%%%%%%
-samp_hyoukati_max=max(samp_hyoukati)*ones(samp_kazu,1);
-samp_seiyakuti_max=max(samp_seiyakuti)*ones(samp_kazu,1);
-y_rbf  = samp_hyoukati - samp_hyoukati_max;
-y_rbf2 = samp_seiyakuti - samp_seiyakuti_max;
+samp_hyoukati_max=max(samp_hyoukati);
+samp_seiyakuti_max=max(samp_seiyakuti);
+samp_hyoukati_max_ex=samp_hyoukati_max*ones(samp_kazu,1);
+samp_seiyakuti_max_ex=samp_seiyakuti_max*ones(samp_kazu,1);
+y_rbf  = samp_hyoukati - samp_hyoukati_max_ex;
+y_rbf2 = samp_seiyakuti - samp_seiyakuti_max_ex;
 %//////////////////// caluculate_dmax ////////////////////%
 for j=1:samp_kazu
     seikiten_ex(:,:,j) = repelem(seikiten(j,:),samp_kazu,1);
