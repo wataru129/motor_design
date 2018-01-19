@@ -3,7 +3,7 @@ particle  = 30;   %The number of Particle
 Iteration = 200;  % Max of reiteration
 %%%%%%%%%%%%%%%%%%%%%%
 
-x_init          = 5*IP(1:particle,1:dimension,T).';
+x_init          = IP(1:particle,1:dimension,T).';
 v_init          = IP(1:particle,1:dimension,T).';
 idx             = kmeans(x_init.',clusta);
 class =zeros(clusta,1);
@@ -11,6 +11,7 @@ x_pso =zeros(dimension,clusta);
 for c_index=1:clusta
 %%%%%%%%%%%%%%%%%%%%%%Initialization%%%%%%%%%%%%%%%%%%%%%%%%%
     flag            = 0;
+    update_flag     = 0;
     ct              = 1;
     class(c_index)  = size(find(idx == c_index),1);
     x_p             = zeros(dimension,class(c_index));
@@ -30,26 +31,26 @@ for c_index=1:clusta
         end
     end
     pbest   = x_p;
-    fpbest=zeros(1,class(c_index));
-    fpbest=O(pbest.', cur_sample_num, omega, r, sample_point);
-    gx=O(pbest.', cur_sample_num, omega, r2, sample_point);
-    fpbest = fpbest+ rr*(max((-SEIYAKU-gx),0)).^2;
+    fpbest  = zeros(1,class(c_index));
+    fpbest  = func_response_surface(pbest.', cur_sample_num, omega, r, sample_point);
+    gx      = func_response_surface(pbest.', cur_sample_num, omega, r2, sample_point);
+    fpbest  = fpbest+ rr*(max((-SEIYAKU-gx),0)).^2;
     [fgbest ig] = min(fpbest);
-    gbest=pbest(:,ig);
+    gbest       = pbest(:,ig);
 %%%%%%%%%%%%%%%%%%%%%%Initialization%%%%%%%%%%%%%%%%%%%%%%%%%
     for k=1:Iteration
-        fx=zeros(1,class(c_index));
+        fx       = zeros(1,class(c_index));
         gbest_ex = gbest * ones(1,class(c_index));
         rd1      = repelem(rand(1,class(c_index)),dimension,1);
         rd2      = repelem(rand(1,class(c_index)),dimension,1);
-        v_p = w_pso.*v_p + c1.*rd1.*(pbest-x_p) + c2.*rd2.*(gbest_ex-x_p);
-        x_p = x_p + v_p;
+        v_p      = w_pso.*v_p + c1.*rd1.*(pbest-x_p) + c2.*rd2.*(gbest_ex-x_p);
+        x_p      = x_p + v_p;
         x_p(x_p > 1)  = 1;
         x_p(x_p < -1) = -1;
         v_p(v_p > 1)  = 1;
         v_p(v_p < -1) = -1;
-        fx = O(x_p.', cur_sample_num, omega, r, sample_point);
-        gx = O(x_p.', cur_sample_num, omega2, r, sample_point);
+        fx = func_response_surface(x_p.', cur_sample_num, omega, r, sample_point);
+        gx = func_response_surface(x_p.', cur_sample_num, omega2, r, sample_point);
         fx = fx + rr*(max((-SEIYAKU-gx),0)).^2;
         for i=1:class(c_index)
             if(fx(i)<fpbest(i))
@@ -85,6 +86,6 @@ for c_index=1:clusta
     y_pso(:,c_index)        = fgbest;
     fgbest_suii(ix,c_index) = fgbest;
     ix(c_index)             = ix(c_index)+1;
-    fx(c_index)             = O(x_pso(:,c_index),omega,seikiten);
-    gx(c_index)             = O(x_pso(:,c_index),omega2,seikiten);
+    fx(c_index)             = func_response_surface(x_pso(:,c_index),omega,seikiten);
+    gx(c_index)             = func_response_surface(x_pso(:,c_index),omega2,seikiten);
 end
