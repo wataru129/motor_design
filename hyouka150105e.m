@@ -12,17 +12,17 @@ for i=1:samp_kazu_add
   X(6)=2.5;    %'3点目x
   X(7)=1.25;   %'3点目y
   X(8)=0.5;    %'4点目x割合
-  X(9)=0.5;    %'4点目y割合
-
+  X(9)=0.5;    %'4点目y割合 
+ 
  %'''ムーバ'''
   X(10)=2.0;   %'磁石端の厚さ;
   X(11)=0.5;  %'凹凸の位置の割合
   X(12)=7.0;  %'凹凸の厚さ
   X(13)=0.5;  %'凹凸の位置の割合
-  X(14)=0.5;  %'凹凸の厚さ中央
+  X(14)=0.5;  %'凹凸の厚さ中央 
 
 %''' 目標値
-   NN=9;
+   NN=9;    
  for k=1:NN
     E(k)=-mokusui*sin(pi/2/(NN-1)*(NN-k));
 %     E(k)=-mokusui;
@@ -57,11 +57,11 @@ for i=1:samp_kazu_add
     %↑Jmagを起動させ、結果を保存させる
     [num,text,all]=xlsread('C:\k2\推力14a.xls');   %結果を保存したエクセルを開く
     for k=1:NN
-        F(k)=num(6+k);
-    end
+        F(k)=num(6+k); 
+    end 
     [num,text,all]=xlsread('C:\k2\吸引力14a.xls');
     for k=1:NN
-        G(k)=num(6+k);
+        G(k)=num(6+k); 
     end
 
 
@@ -88,4 +88,5 @@ for i=1:samp_kazu_add
  %       rr =rr*2
  %   end
     count=count+1
+    
 end
