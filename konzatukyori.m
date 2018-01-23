@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 seikiten_ex          = [];
 sort_seikiten        = [];
 seikiten_ex          = [seikiten ; add_temp];
 sort_seikiten        = sort(seikiten_ex,1);
 seikiten_add_temp_c  = zeros(size(seikiten_ex,1),dimension);
+=======
+seikiten_add_temp_c=[];
+seikiten_add_temp_so=[];
+samp_kazu_add_kyori=[];                      %‘a‚È—Ìˆæ‚ð”»’è‚·‚é‚½‚ß‚Ì‹——£‚Ì” 
+seikiten_ex=seikiten;
+seikiten_ex=[seikiten_ex;seikiten_add_temp];
+sort_seikiten=sort(seikiten_ex,1);
+>>>>>>> cc3f02acce0dae00a7ec668c0b42203c5ef6a61e
 for J2=1:size(seikiten_ex,1)-1
     for J3=1:dimension
         seikiten_add_temp_c(J2,J3)=abs(sort_seikiten(J2+1,J3)-sort_seikiten(J2,J3));
@@ -10,7 +19,11 @@ for J2=1:size(seikiten_ex,1)-1
 end
 [samp_kyori_max bango] = max(seikiten_add_temp_c);
 for J3=1:dimension
+<<<<<<< HEAD
     so_ten(1,J3) = sort_seikiten(bango(1,J3),J3)+samp_kyori_max(1,J3)./2;  %‘a‚È—Ìˆæ‚Ìˆê“_
+=======
+    so_ten(1,J3)=sort_seikiten(bango(1,J3),J3)+samp_kyori_max(1,J3)./2;  %‘a‚È—Ìˆæ‚Ìˆê“_
+>>>>>>> cc3f02acce0dae00a7ec668c0b42203c5ef6a61e
 end
 add_temp(so,:) = so_ten;
 so                      = so+1;
