@@ -29,4 +29,5 @@ update_jyoukyou(1,1) = update_flag;
 for k=1:NN
             E(k)=-mokusui*sin(pi/2/(NN-1)*(NN-k));
 end
+X  = zeros(1,14);                                              % 変数
 %%%%%%%%%%%%%%% Finish initialization %%%%%%%%%%%%%%%

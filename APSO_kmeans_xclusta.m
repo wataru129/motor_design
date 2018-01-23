@@ -84,8 +84,7 @@ for c_index=1:clusta
     end
     x_pso(:,c_index)        = gbest.';
     y_pso(:,c_index)        = fgbest;
-    fgbest_suii(ix,c_index) = fgbest;
-    ix(c_index)             = ix(c_index)+1;
+    fgbest_suii(C,c_index) = fgbest;
     fx(c_index)             = func_response_surface(x_pso(:,c_index),omega,seikiten);
     gx(c_index)             = func_response_surface(x_pso(:,c_index),omega2,seikiten);
 end
