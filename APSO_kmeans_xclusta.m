@@ -2,9 +2,11 @@
 particle  = 30;   %The number of Particle
 Iteration = 200;  % Max of reiteration
 %%%%%%%%%%%%%%%%%%%%%%
-
-x_init          = IP(1:particle,1:dimension,T).';
-v_init          = IP(1:particle,1:dimension,T).';
+if C == 1
+    IP=(-1) + (1-(-1))*rand(particle,dimension);
+end
+x_init          = IP.';
+v_init          = IP.';
 idx             = kmeans(x_init.',clusta);
 class =zeros(clusta,1);
 x_pso =zeros(dimension,clusta);

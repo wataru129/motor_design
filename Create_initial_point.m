@@ -1,8 +1,8 @@
 %%%%%% 初期点設定 %%%%%&%%%
-seikiten=syokiten(1:dimension,1:samp_kazu,e)';
+seikiten = (-1) + (1 - (-1)) *rand(samp_kazu,dimension);
 for i=1:samp_kazu                        %初期サンプル点設定
     for j=1:dimension
-            ini_samp_ten(i,j) = ((p_max(j)+p_min(j))./2+((p_max(j)-p_min(j))./2).*(rand*2-1.));
+        ini_samp_ten(i,j) = ((p_max(j)+p_min(j))./2+((p_max(j)-p_min(j))./2).*(rand*2-1.));
     end
 end
 if (C1==1) && (C==0)
