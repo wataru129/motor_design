@@ -2,7 +2,8 @@
 seikiten = (-1) + (1 - (-1)) *rand(samp_kazu,dimension);
 for i=1:samp_kazu                        %初期サンプル点設定
     for j=1:dimension
-        ini_samp_ten(i,j) = ((p_max(j)+p_min(j))./2+((p_max(j)-p_min(j))./2).*(rand*2-1.));
+%        ini_samp_ten(i,j) = ((p_max(j)+p_min(j))./2+((p_max(j)-p_min(j))./2).*(rand*2-1.));
+        ini_samp_ten(i,j) = ((p_max(j)+p_min(j))./2+((p_max(j)-p_min(j))./2).*seikiten(i,j));
     end
 end
 if (C1==1) && (C==0)
@@ -17,15 +18,15 @@ samp_ten     = ini_samp_ten;
 
 for i=1:samp_kazu
     if C1==1
-        [samp_hyoukati(h),samp_seiyakuti(h)] ...
-          = Do_jmag(samp_ten(i,:),f_number,count,samp_su,E,NN)
+        [samp_hyoukati(i),samp_seiyakuti(i)] ...
+          = Do_jmag(samp_ten(i,:),dimension,count,samp_su,E,NN);
     elseif C1==2
-        samp_hyoukati(h)         = Calculate_value(samp_ten);
-        samp_seiyakuti(h) = samp_ten_add(c_index,2);
+        samp_hyoukati(i,1)  = Calculate_value(samp_ten(i,:).',ra);
+        samp_seiyakuti(i,1) = ini_samp_ten(i,2);
     end
 end
 
-samp_hyoukati2              = samp_hyoukati+ rr*(max((-SEIYAKU-samp_seiyakuti),0)).^2
+samp_hyoukati2              = samp_hyoukati+ rr*(max((-SEIYAKU-samp_seiyakuti),0)).^2;
 samp_seiyakuti2             = rr*C*(max((-SEIYAKU-samp_seiyakuti),0)).^2;
 
 [tmp_hyoukati2_best bango] = min(samp_hyoukati2);
@@ -33,7 +34,7 @@ for c_index=1:clusta
     seiyakuti_best(c_index)           = samp_seiyakuti(bango);
     hyoukati_best(c_index)            = samp_hyoukati(bango);
     hyoukati2_best(c_index)           = tmp_hyoukati2_best;
-    seikiten_best(c_index,:)          = samp_seiyakuti(bango,:);
+    seikiten_best(c_index,:)          = seikiten(bango,:);
     samp_ten_best(c_index,:)          = samp_ten(bango,:);
     samp_hyouka_best_suii(C,c_index)  = hyoukati_best(c_index);
     samp_hyouka2_best_suii(C,c_index) = hyoukati2_best(c_index);

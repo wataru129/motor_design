@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%% Initialization %%%%%%%%%%%%%%%
 count                   = 0;
 ix                      = 1;       % PSOの更新回数
-C                       = 0;       %サンプル点を追加した回数
+C                       = 1;       %サンプル点を追加した回数
 hyoukati_best           = 0;
 samp_su                 = 0;       % ???
 heikin                  = 0;
@@ -24,9 +24,8 @@ update_jyoukyou         = [];
 p_max                   = [];       %サンプル点の範囲（上限）
 p_min                   = [];       %サンプル点の範囲（下限）
 samp_kazu         = samp_syoki;     %サンプル点の数
-samp_kazu_add     = samp_syoki;     %追加サンプル点数
 samp_kazu_add_so  = samp_syoki;     %疎な領域にサンプル点を撒くためのサンプル点10
-update_jyoukyou(1,1) = update_flag;
+update_jyoukyou(:,1) = update_flag;
 for k=1:NN
             E(k)=-mokusui*sin(pi/2/(NN-1)*(NN-k));
 end

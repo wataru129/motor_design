@@ -7,17 +7,17 @@ e  = 1;                                            % e:初期値配列の３次元目
 %%%%%%%%%%%%%%%%%%%%%%パラメータ設定開始%%%%%%%%%%%%%%%%%%%%%%%
 mokusui       = 130.0;
 SEIYAKU       = 2000;
-clusta        = 5;
-dimension     = 14;                                %次元数
-samp_syoki    = 10;                                %初期サンプル点数30
-per_clusta    = 10;                                %1クラスタあたりの追加サンプル点数
-samp_kazu_add = per_clusta * clusta;               %追加サンプル点数
-samp_kazu_max = 20;                                %最大サンプル点数600-1200
-CL            = 1;                                 %集中的探索の度合
-C1            = 1;                                 %C1=1;本番C1= 2; test
-update_flag   = ones(c_index,1);                   %最良解更新フラグ初期化
-update_flag2  = zeros(c_index,1);
-C_total       = ceil((samp_kazu_max-samp_kazu) ...
+clusta        = 1;
+dimension     = 10;                               %次元数
+samp_syoki    = 50;                               %初期サンプル点数30
+per_clusta    = 10;                               %1クラスタあたりの追加サンプル点数
+samp_kazu_add = per_clusta * clusta;              %追加サンプル点数
+samp_kazu_max = 300;                              %最大サンプル点数600-1200
+C1            = 2;                                %C1=1;本番C1= 2; test
+CL            = ones(clusta,1);                   %集中的探索の度合
+update_flag   = ones(clusta,1);                   %最良解更新フラグ初期化
+update_flag2  = zeros(clusta,1);
+C_total       = ceil((samp_kazu_max-samp_syoki) ...
                                   /samp_kazu_add); %サンプル点数を追加する総回数
 %%%%%%%%%%%%%%%%%%%%% パラメータ設定の終了 %%%%%%%%%%%%%%%%%%%%%%%%%
 Initialization

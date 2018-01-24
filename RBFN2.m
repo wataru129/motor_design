@@ -2,11 +2,9 @@
 %    ---------- パラメータ設定開始 --------------   %
 samp_hyoukati_max=max(samp_hyoukati);
 samp_seiyakuti_max=max(samp_seiyakuti);      %%%
-
 for h=1:samp_kazu
-    y_rbf(h,1)  = samp_hyoukati(h,1)-samp_hyoukati_max;
-    y_rbf2(h,1) = samp_seiyakuti(h,1)-samp_seiyakuti_max;  %%%
-
+    y_rbf(h,1)  = samp_hyoukati(h)-samp_hyoukati_max;
+    y_rbf2(h,1) = samp_seiyakuti(h)-samp_seiyakuti_max;  %%%
 end
 %   ----------- パラメータ設定の終了 ---------------   %
 H=zeros(samp_kazu,samp_kazu);                     % H行列の初期化

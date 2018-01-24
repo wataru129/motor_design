@@ -26,7 +26,7 @@ for c_index = 1:clusta
         kyori_pb = sqrt(sum((x_pso(c_index,:)-seikiten_best(c_index,:)).^2,2)); %x_pso‚Æxbest‚Ì‹——£ŒvZ
         Arx_pb   = sum(Arx);                                                    %Arx‚Ì‹——£
         if Arx_pb>=kyori_pb
-            add_temp_b  = Neighborhood(N_superior,seikiten_best(c_index),Arx,dimension);
+            add_temp_b  = Neighborhood(N_superior,seikiten_best(c_index,:),Arx,dimension);
             CL(c_index) = CL(c_index)+1;
         else
             add_temp_b = Neighborhood(floor(N_superior/2),seikiten_best(c_index,:),Arx,dimension);
@@ -37,14 +37,14 @@ for c_index = 1:clusta
     %////////////// ‘a‚È—Ìˆæ‚ÉT‚­ ///////////////////////
         Sparse_area
     end
-    seikiten_add(:,:,c_index) = [add_temp_b;add_temp_p;add_temp];
+    seikiten_add(:,:,c_index) = [add_temp_b;add_temp_p;add_temp;x_pso(c_index,:)];
 end
 seikiten_add(seikiten_add > 1)  = 1;
 seikiten_add(seikiten_add < -1) = -1;
 for c_index = 1:clusta
     for i = 1:per_clusta
-        samp_ten_add(i,:,c_index) = (p_max+p_min)./2 ...
-            +((p_max - p_min)./2).*seikiten_add(i,:,c_index);
+        samp_ten_add(i,:,c_index) = ((p_max+p_min)./2 ...
+            +((p_max - p_min)./2)).'.*seikiten_add(i,:,c_index);
     end
 end
 samp_ten_add(samp_ten_add<0.05 & samp_ten_add>0)  = 0.1;

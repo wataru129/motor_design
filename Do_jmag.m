@@ -1,4 +1,4 @@
-function [hyoukati,seiyakuti,count,samp_su]=Calculate_value(X,f_number,count,samp_su,E,NN)
+function [hyoukati,seiyakuti,count,samp_su]=Calculate_value(X,dimension,count,samp_su,E,NN)
     FF=0;
     F = zeros(1,NN);
     G = zeros(1,NN);
